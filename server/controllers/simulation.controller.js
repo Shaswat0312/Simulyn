@@ -3,8 +3,8 @@
 
     const runSimulation = async (req,res) => {
         try {
-            const {apiUrl,failureRate,latency,concurrentUsers} = req.body
-            const result = await processSimulation({apiUrl,failureRate,latency,concurrentUsers})
+            const {apiUrl,failureRate,latency,concurrentUsers,circuitBreakerEnabled, circuitBreakerThreshold } = req.body
+            const result = await processSimulation({apiUrl,failureRate,latency,concurrentUsers,circuitBreakerEnabled,circuitBreakerThreshold})
             return res.status(200).json({
                 message:"Success",
                 result,

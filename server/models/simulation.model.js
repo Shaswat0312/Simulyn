@@ -41,10 +41,19 @@ const simulationSchema = new mongoose.Schema({
     aiReport : {
         type:String,
         default:null
-    }
-    
-
-
+    },
+    circuitBreakerEnabled: {
+    type: Boolean,
+    default: false
+   },
+   circuitBreakerThreshold: {
+    type: Number,
+    default: 50
+   },
+   circuitBreakerTripped: {
+    type: Boolean,
+    default: false
+   }  
 },{timestamps:true})
 
 const simulation = mongoose.model("simulation",simulationSchema)
