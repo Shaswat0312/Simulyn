@@ -1,5 +1,6 @@
 import Simulation from "../models/simulation.model.js"
 import { broadcast } from "../websocket/socketManager.js"
+import generateReport from "../ai/reportGenerator.js"
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve,ms))
 
@@ -55,9 +56,15 @@ const processSimulation = async (config) =>
        data._id,
        {successCount,failureCount,circuitBreakerTripped:circuitBreaker,averageResponseTime:avgResTime,status: "completed",totalDuration},{ new: true }
     )
-    broadcast({ successCount, failureCount, status: 'completed', totalDuration })
+    const report = await generateReport(updated)
+    await Simulation.findByIdAndUpdate(
+    data._id,
+        { aiReport: report }
+        )
+    broadcast({ status: 'completed', successCount, failureCount, totalDuration, aiReport: report })
     console.log(`Updated Successfully ${updated._id}` )
-    return updated
-
+    const finalResult = await Simulation.findById(data._id);
+    return finalResult;
+   
 }
 export default processSimulation
