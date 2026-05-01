@@ -1,8 +1,17 @@
 import express from "express"
-import runSimulation from "../controllers/simulation.controller.js"
+import {
+  runSimulation,
+  getSimulations,
+  getSimulationById,
+  compareSimulations
+} from "../controllers/simulation.controller.js"
+
 const router = express.Router()
 
-router.route("/simulate").post(runSimulation)
+router.post("/simulate", runSimulation)
 
+router.get("/simulations", getSimulations)
+router.get("/simulations/compare", compareSimulations)
+router.get("/simulations/:id", getSimulationById)
 
 export default router

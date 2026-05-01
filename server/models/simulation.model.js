@@ -38,6 +38,16 @@ const simulationSchema = new mongoose.Schema({
         type:Number,
         default:0
     },
+    history: {
+  type: [
+    {
+      batch: Number,
+      successCount: Number,
+      failureCount: Number
+    }
+  ],
+  default: []
+},
     aiReport : {
         type:String,
         default:null
