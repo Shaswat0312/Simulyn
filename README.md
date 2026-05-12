@@ -44,4 +44,6 @@ It combines:
 - Prevents cascading failures and mimics real-world resilience strategies  
 - Displays breaker state (CLOSED / TRIPPED) in real-time  
 
+### ScreenShots
+
 
